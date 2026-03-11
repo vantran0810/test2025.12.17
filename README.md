@@ -1,17 +1,29 @@
-# SmartGallery
+import os
+import shutil
+from classifier.image_classifier import simple_classifier
 
-AI powered photo organizer.
 
-Automatically sorts images into folders based on visual features.
+class GalleryManager:
 
-Folders created:
+    def __init__(self, image_folder):
 
-- nature
-- people
-- other
+        self.folder = image_folder
 
-Run
+    def organize(self):
 
-pip install -r requirements.txt
+        for file in os.listdir(self.folder):
 
-python main.py
+            if not file.lower().endswith((".jpg", ".png")):
+                continue
+
+            path = os.path.join(self.folder, file)
+
+            label = simple_classifier(path)
+
+            target = os.path.join(self.folder, label)
+
+            os.makedirs(target, exist_ok=True)
+
+            shutil.move(path, os.path.join(target, file))
+
+            print("Moved", file, "to", label)
