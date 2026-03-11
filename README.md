@@ -1,29 +1,22 @@
 import os
-import shutil
-from classifier.image_classifier import simple_classifier
+from PIL import Image
+import numpy as np
 
+def simple_classifier(image_path):
 
-class GalleryManager:
+    img = Image.open(image_path)
+    img = img.resize((64, 64))
 
-    def __init__(self, image_folder):
+    arr = np.array(img)
 
-        self.folder = image_folder
+    r = arr[:, :, 0].mean()
+    g = arr[:, :, 1].mean()
+    b = arr[:, :, 2].mean()
 
-    def organize(self):
+    if g > r and g > b:
+        return "nature"
 
-        for file in os.listdir(self.folder):
+    if r > g and r > b:
+        return "people"
 
-            if not file.lower().endswith((".jpg", ".png")):
-                continue
-
-            path = os.path.join(self.folder, file)
-
-            label = simple_classifier(path)
-
-            target = os.path.join(self.folder, label)
-
-            os.makedirs(target, exist_ok=True)
-
-            shutil.move(path, os.path.join(target, file))
-
-            print("Moved", file, "to", label)
+    return "other"
