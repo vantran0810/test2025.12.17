@@ -1,27 +1,17 @@
-# test2025.12.17
-test commit 1
-test commit 2
-test commit 3
-test commit 4
-test commit 5
-test commit 6
-test commit 7
-test commit 8
-test commit 9
-test commit 10
-test commit 11
-test commit 12
-test commit 13
-test commit 14
-test commit 15
-test commit 16
-test commit 17
-test commit 18
-test commit 19
-test commit 20
-test commit 21
-test commit 22
-test commit 23
-test commit 24
-test commit 25
-test commit 26
+# SmartGallery
+
+AI powered photo organizer.
+
+Automatically sorts images into folders based on visual features.
+
+Folders created:
+
+- nature
+- people
+- other
+
+Run
+
+pip install -r requirements.txt
+
+python main.py
